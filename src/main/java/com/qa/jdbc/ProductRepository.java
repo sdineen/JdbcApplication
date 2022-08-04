@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Optional;
 
 public class ProductRepository {
 
@@ -55,6 +56,38 @@ public class ProductRepository {
 			System.out.println(e.getMessage());
 		}
 		return null;
+	}
+	
+	
+	public Optional<Product> readProductOptional(int id) {
+		String url = "jdbc:mysql://localhost:3306/ecommerce";
+		String user = "root";
+		String password = "carpond";
+		// autocloseable object
+		try (Connection c = DriverManager.getConnection(url, user, password)) {
+
+			Statement statement = c.createStatement();
+			String sql = "select * from product where id = "+id;
+			ResultSet resultSet = statement.executeQuery(sql);
+			boolean rowRead = resultSet.next();
+			if(rowRead) {
+				int idValue = resultSet.getInt("id");
+				String name = resultSet.getString("name");
+				double costPrice = resultSet.getDouble("costPrice");
+				double retailPrice = resultSet.getDouble("retailPrice");
+				Product product = new Product(idValue, name, costPrice, retailPrice);
+				return Optional.of(product);
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return Optional.empty();
+	}
+
+	public boolean updateProduct(Product product) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
