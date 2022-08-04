@@ -8,12 +8,10 @@ public class ConnectToDb {
 
 
 	public Connection getConnection() {
-		String url = "jdbc:mysql://localhost:3306/ecommerce";
-		String user = "root";
-		String password = "carpond";
+		String url = "jdbc:h2:~/db1";
 
 		//autocloseable object
-		try (Connection c = DriverManager.getConnection(url, user, password)) {
+		try (Connection c = DriverManager.getConnection(url)) {
 			return c;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
