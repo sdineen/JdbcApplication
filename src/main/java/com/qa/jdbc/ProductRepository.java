@@ -15,8 +15,7 @@ public class ProductRepository {
 		String password = "carpond";
 
 		//autocloseable object
-		try (Connection c = DriverManager.getConnection(url, user, password)) {
-			
+		try (Connection c = DriverManager.getConnection(url, user, password)) {		
 			String sql = "insert into Product (id, name, costPrice, retailPrice) values(?,?,?,?)";
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setInt(1, product.getId());
@@ -24,18 +23,17 @@ public class ProductRepository {
 			ps.setDouble(3, product.getCostPrice());
 			ps.setDouble(4, product.getRetailPrice());
 			int rowCount = ps.executeUpdate();
-		
-			//Statement statement = c.createStatement();
-//			String sql = "insert into product (id, name, costprice, retailprice) values ("
-//					+product.getId()+",'"+product.getName()+"',"+product.getCostPrice()
-//					+","+product.getRetailPrice()+");";
-			
-			//int rowCount = statement.executeUpdate(sql);		
+	
 			return rowCount==1;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		return false;
+	}
+
+	public Product readProduct(int i) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
