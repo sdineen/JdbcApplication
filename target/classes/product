@@ -1,8 +1,8 @@
 CREATE TABLE 'ecommerce'.'product' (
   'id' INT NOT NULL,
   'name' VARCHAR(45) NULL,
-  'costPrice' DECIMAL NULL,
-  'retailPrice' DECIMAL NULL,
+  'costPrice' DOUBLE NULL,
+  'retailPrice' DOUBLE NULL,
   PRIMARY KEY ('id'));
   
   
