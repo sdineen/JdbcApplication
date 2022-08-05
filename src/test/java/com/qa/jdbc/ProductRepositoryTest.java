@@ -22,7 +22,7 @@ public class ProductRepositoryTest {
 	@Test
 	public void updateProductTest() {
 		ProductRepository repository = new ProductRepository();
-		Product product = new Product(3, "Cat food", 0.87, 2.45); 
+		Product product = new Product(2, "Cat food", 0.87, 2.45); 
 		boolean updated = repository.updateProduct(product);
 		assertTrue(updated);
 	}

@@ -86,8 +86,27 @@ public class ProductRepository {
 	}
 
 	public boolean updateProduct(Product product) {
-		// TODO Auto-generated method stub
+		String url = "jdbc:mysql://localhost:3306/ecommerce";
+		String user = "root";
+		String password = "carpond";
+
+		
+		// autocloseable object
+		try (Connection c = DriverManager.getConnection(url, user, password)) {
+			String sql = "update product set name = ?, costPrice= ?, retailPrice = ? where id = ?";
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setInt(4, product.getId());
+			ps.setString(1, product.getName());
+			ps.setDouble(2, product.getCostPrice());
+			ps.setDouble(3, product.getRetailPrice());
+			int rowCount = ps.executeUpdate();
+
+			return rowCount == 1;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		return false;
 	}
+	
 
 }
